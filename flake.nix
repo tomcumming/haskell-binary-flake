@@ -57,17 +57,17 @@
               cp -r lib $out/lib
             '';
           };
-        hls24ghc96 =
+        hls25ghc96 =
           let
-            url = https://downloads.haskell.org/~hls/haskell-language-server-2.4.0.0/haskell-language-server-2.4.0.0-aarch64-apple-darwin.tar.xz;
+            url = https://downloads.haskell.org/~hls/haskell-language-server-2.5.0.0/haskell-language-server-2.5.0.0-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
-            name = "hls24ghc96";
+            name = "hls25ghc96";
             src = pkgs.fetchurl {
               url = url;
-              sha256 = "dM+kf5YaxWBwVcovQAtHGlNee5gukQ4YfHwTA7BI7q8=";
+              sha256 = "LlCD6/f8ndPFqjEFn5M2vsRAf/+yG5OiDey0npz4gKQ=";
             };
-            sourceRoot = "haskell-language-server-2.4.0.0";
+            sourceRoot = "haskell-language-server-2.5.0.0";
             dontPatch = true;
             dontBuild = true;
             dontStrip = true;
