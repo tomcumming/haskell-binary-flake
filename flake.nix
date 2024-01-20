@@ -11,15 +11,15 @@
       in rec {
         ghc96 =
           let
-            url = https://downloads.haskell.org/~ghc/9.6.3/ghc-9.6.3-aarch64-apple-darwin.tar.xz;
+            url = https://downloads.haskell.org/~ghc/9.6.4/ghc-9.6.4-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
             name = "ghc96";
             src = pkgs.fetchurl {
               url = url;
-              sha256 = "4c30WJJrLq9S0qgofZmpZQQP+QURcfXDt0ZwSc8OshM=";
+              sha256 = "sha256-Ja/8nOtvIDJwbsG0t7pdFL003ztSI9gGDyEK7OJf7qk=";
             };
-            sourceRoot = "ghc-9.6.3-aarch64-apple-darwin";
+            sourceRoot = "ghc-9.6.4-aarch64-apple-darwin";
             dontPatch = true;
             dontBuild = true;
             dontStrip = true;
@@ -57,55 +57,29 @@
               cp -r lib $out/lib
             '';
           };
-        hls25ghc96 =
+        hls26ghc96 =
           let
-            url = https://downloads.haskell.org/~hls/haskell-language-server-2.5.0.0/haskell-language-server-2.5.0.0-aarch64-apple-darwin.tar.xz;
+            url = https://downloads.haskell.org/~hls/haskell-language-server-2.6.0.0/haskell-language-server-2.6.0.0-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
-            name = "hls25ghc96";
+            name = "hls26ghc96";
             src = pkgs.fetchurl {
               url = url;
-              sha256 = "LlCD6/f8ndPFqjEFn5M2vsRAf/+yG5OiDey0npz4gKQ=";
+              sha256 = "sha256-iYxPGIyjvDinz9OoMCNk+wrjXEJScBdwBzgl9olMur8=";
             };
-            sourceRoot = "haskell-language-server-2.5.0.0";
+            sourceRoot = "haskell-language-server-2.6.0.0";
             dontPatch = true;
             dontBuild = true;
             dontStrip = true;
             dontConfigure = true;
             installPhase = ''
               mkdir -p $out/bin
-              mkdir -p $out/lib/9.6.3
-              cp bin/haskell-language-server-9.6.3 bin/haskell-language-server-wrapper $out/bin/
-              cp lib/9.6.3/*.dylib $out/lib/9.6.3/
-              for f in ${ghc96}/lib/aarch64-osx-ghc-9.6.3/*.dylib
+              mkdir -p $out/lib/9.6.4
+              cp bin/haskell-language-server-9.6.4 bin/haskell-language-server-wrapper $out/bin/
+              cp lib/9.6.4/*.dylib $out/lib/9.6.4/
+              for f in ${ghc96}/lib/aarch64-osx-ghc-9.6.4/*.dylib
               do
-                ln -s $f $out/lib/9.6.3/
-              done
-            '';
-          };
-        hls25ghc98 =
-          let
-            url = https://downloads.haskell.org/~hls/haskell-language-server-2.5.0.0/haskell-language-server-2.5.0.0-aarch64-apple-darwin.tar.xz;
-          in
-          pkgs.stdenv.mkDerivation {
-            name = "hls25ghc98";
-            src = pkgs.fetchurl {
-              url = url;
-              sha256 = "LlCD6/f8ndPFqjEFn5M2vsRAf/+yG5OiDey0npz4gKQ=";
-            };
-            sourceRoot = "haskell-language-server-2.5.0.0";
-            dontPatch = true;
-            dontBuild = true;
-            dontStrip = true;
-            dontConfigure = true;
-            installPhase = ''
-              mkdir -p $out/bin
-              mkdir -p $out/lib/9.8.1
-              cp bin/haskell-language-server-9.8.1 bin/haskell-language-server-wrapper $out/bin/
-              cp lib/9.8.1/*.dylib $out/lib/9.8.1/
-              for f in ${ghc98}/lib/aarch64-osx-ghc-9.8.1/*.dylib
-              do
-                ln -s $f $out/lib/9.8.1/
+                ln -s $f $out/lib/9.6.4/
               done
             '';
           };
