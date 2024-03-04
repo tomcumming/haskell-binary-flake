@@ -9,41 +9,17 @@
     packages."aarch64-darwin" =
       let pkgs = nixpkgs.legacyPackages."aarch64-darwin";
       in rec {
-        ghc96 =
-          let
-            url = https://downloads.haskell.org/~ghc/9.6.4/ghc-9.6.4-aarch64-apple-darwin.tar.xz;
-          in
-          pkgs.stdenv.mkDerivation {
-            name = "ghc96";
-            src = pkgs.fetchurl {
-              url = url;
-              sha256 = "sha256-Ja/8nOtvIDJwbsG0t7pdFL003ztSI9gGDyEK7OJf7qk=";
-            };
-            sourceRoot = "ghc-9.6.4-aarch64-apple-darwin";
-            dontPatch = true;
-            dontBuild = true;
-            dontStrip = true;
-            configurePhase = ''
-              ./configure
-              make lib/settings
-            '';
-            installPhase = ''
-              mkdir -p $out
-              cp -r bin $out/bin
-              cp -r lib $out/lib
-            '';
-          };
         ghc98 =
           let
-            url = https://downloads.haskell.org/~ghc/9.8.1/ghc-9.8.1-aarch64-apple-darwin.tar.xz;
+            url = https://downloads.haskell.org/~ghc/9.8.2/ghc-9.8.2-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
             name = "ghc98";
             src = pkgs.fetchurl {
               url = url;
-              sha256 = "o4uwb2DJLTSOPuknpKiOiEiPh06Z9EDQYkSk5Pnbnjs=";
+              sha256 = "Z74Ine2+WZ2RHv2PguT5oZIldho4cr5039S1pVf7jho=";
             };
-            sourceRoot = "ghc-9.8.1-aarch64-apple-darwin";
+            sourceRoot = "ghc-9.8.2-aarch64-apple-darwin";
             dontPatch = true;
             dontBuild = true;
             dontStrip = true;
@@ -57,29 +33,29 @@
               cp -r lib $out/lib
             '';
           };
-        hls26ghc96 =
+        hls27ghc98 =
           let
-            url = https://downloads.haskell.org/~hls/haskell-language-server-2.6.0.0/haskell-language-server-2.6.0.0-aarch64-apple-darwin.tar.xz;
+            url = https://downloads.haskell.org/~hls/haskell-language-server-2.7.0.0/haskell-language-server-2.7.0.0-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
-            name = "hls26ghc96";
+            name = "hls27ghc98";
             src = pkgs.fetchurl {
               url = url;
-              sha256 = "sha256-iYxPGIyjvDinz9OoMCNk+wrjXEJScBdwBzgl9olMur8=";
+              sha256 = "fKbtTWy4DltIbDNKjVeZJ5eO21a52xupLiyKqJMudQY=";
             };
-            sourceRoot = "haskell-language-server-2.6.0.0";
+            sourceRoot = "haskell-language-server-2.7.0.0";
             dontPatch = true;
             dontBuild = true;
             dontStrip = true;
             dontConfigure = true;
             installPhase = ''
               mkdir -p $out/bin
-              mkdir -p $out/lib/9.6.4
-              cp bin/haskell-language-server-9.6.4 bin/haskell-language-server-wrapper $out/bin/
-              cp lib/9.6.4/*.dylib $out/lib/9.6.4/
-              for f in ${ghc96}/lib/aarch64-osx-ghc-9.6.4/*.dylib
+              mkdir -p $out/lib/9.8.2
+              cp bin/haskell-language-server-9.8.2 bin/haskell-language-server-wrapper $out/bin/
+              cp lib/9.8.2/*.dylib $out/lib/9.8.2/
+              for f in ${ghc98}/lib/aarch64-osx-ghc-9.8.2/*.dylib
               do
-                ln -s $f $out/lib/9.6.4/
+                ln -s $f $out/lib/9.8.2/
               done
             '';
           };
