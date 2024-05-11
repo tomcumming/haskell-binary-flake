@@ -33,17 +33,17 @@
               cp -r lib $out/lib
             '';
           };
-        hls27ghc98 =
+        hls28ghc98 =
           let
-            url = https://downloads.haskell.org/~hls/haskell-language-server-2.7.0.0/haskell-language-server-2.7.0.0-aarch64-apple-darwin.tar.xz;
+            url = https://downloads.haskell.org/~hls/haskell-language-server-2.8.0.0/haskell-language-server-2.8.0.0-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
-            name = "hls27ghc98";
+            name = "hls28ghc98";
             src = pkgs.fetchurl {
               url = url;
-              sha256 = "fKbtTWy4DltIbDNKjVeZJ5eO21a52xupLiyKqJMudQY=";
+              sha256 = "sha256-Skiwr9IOgE9Mu2gun00xMthoxLsL0Ksx+gxPaiH6JJo=";
             };
-            sourceRoot = "haskell-language-server-2.7.0.0";
+            sourceRoot = "haskell-language-server-2.8.0.0";
             dontPatch = true;
             dontBuild = true;
             dontStrip = true;
