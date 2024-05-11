@@ -57,39 +57,12 @@
               cp -r lib $out/lib
             '';
           };
-        hls28ghc98 =
+        hls28 =
           let
             url = https://downloads.haskell.org/~hls/haskell-language-server-2.8.0.0/haskell-language-server-2.8.0.0-aarch64-apple-darwin.tar.xz;
           in
           pkgs.stdenv.mkDerivation {
-            name = "hls28ghc98";
-            src = pkgs.fetchurl {
-              url = url;
-              sha256 = "sha256-Skiwr9IOgE9Mu2gun00xMthoxLsL0Ksx+gxPaiH6JJo=";
-            };
-            sourceRoot = "haskell-language-server-2.8.0.0";
-            dontPatch = true;
-            dontBuild = true;
-            dontStrip = true;
-            dontConfigure = true;
-            installPhase = ''
-              mkdir -p $out/bin
-              mkdir -p $out/lib/9.8.2
-              cp bin/haskell-language-server-9.8.2 bin/haskell-language-server-wrapper $out/bin/
-              cp lib/9.8.2/*.dylib $out/lib/9.8.2/
-              for f in ${ghc98}/lib/aarch64-osx-ghc-9.8.2/*.dylib
-              do
-                ln -s $f $out/lib/9.8.2/
-              done
-            '';
-          };
-        # TODO dedup
-        hls28ghc96 =
-          let
-            url = https://downloads.haskell.org/~hls/haskell-language-server-2.8.0.0/haskell-language-server-2.8.0.0-aarch64-apple-darwin.tar.xz;
-          in
-          pkgs.stdenv.mkDerivation {
-            name = "hls28ghc96";
+            name = "hls28";
             src = pkgs.fetchurl {
               url = url;
               sha256 = "sha256-Skiwr9IOgE9Mu2gun00xMthoxLsL0Ksx+gxPaiH6JJo=";
@@ -102,11 +75,17 @@
             installPhase = ''
               mkdir -p $out/bin
               mkdir -p $out/lib/9.6.5
-              cp bin/haskell-language-server-9.6.5 bin/haskell-language-server-wrapper $out/bin/
+              mkdir -p $out/lib/9.8.2
+              cp bin/haskell-language-server-9.6.5 bin/haskell-language-server-9.8.2 bin/haskell-language-server-wrapper $out/bin/
               cp lib/9.6.5/*.dylib $out/lib/9.6.5/
+              cp lib/9.8.2/*.dylib $out/lib/9.8.2/
               for f in ${ghc96}/lib/aarch64-osx-ghc-9.6.5/*.dylib
               do
                 ln -s $f $out/lib/9.6.5/
+              done
+              for f in ${ghc98}/lib/aarch64-osx-ghc-9.8.2/*.dylib
+              do
+                ln -s $f $out/lib/9.8.2/
               done
             '';
           };
